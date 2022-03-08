@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_08_145536) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_08_151619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "exams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "test_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "answer"
+    t.uuid "exam_id", null: false
+    t.uuid "test_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_test_answers_on_exam_id"
+    t.index ["test_id"], name: "index_test_answers_on_test_id"
+  end
 
   create_table "test_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "input"
@@ -32,5 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_08_145536) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "test_answers", "exams"
+  add_foreign_key "test_answers", "tests"
   add_foreign_key "test_cases", "tests"
 end
