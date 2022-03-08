@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_08_145003) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_08_145536) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "test_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "input"
+    t.string "expected_return"
+    t.uuid "test_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_test_cases_on_test_id"
+  end
 
   create_table "tests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
@@ -23,4 +32,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_08_145003) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "test_cases", "tests"
 end
