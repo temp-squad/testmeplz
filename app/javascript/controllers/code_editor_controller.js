@@ -20,5 +20,7 @@ export default class extends Controller {
       this.statusTarget.innerText = "Saving..."
       this.formTarget.requestSubmit()
     })
+
+    codeEditor.setSize(null, "100%")
   }
 }
