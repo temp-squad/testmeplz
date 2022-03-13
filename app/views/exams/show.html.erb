@@ -1,7 +1,7 @@
 <% @test = @exam.tests.first %>
 <% @test_answer = @exam.test_answers.find_by(test_id: @test.id) %>
 <div class="p-4">
-  <div class="flex gap-4">
+  <div class="flex">
     <div class="w-3/6">
       <div class="border p-4 rounded-md">
         <div class="mb-4"><%= @test.title %></div>
@@ -9,9 +9,10 @@
       </div>
     </div>
     <div class="w-full">
-      <%= form_tag exam_submissions_path(exam_id: @exam.id) do %>
+      <%= form_with url: answer_path(@test_answer), authenticity_token: false, method: :patch, id: 'answer-form' do %>
         <%= hidden_field_tag :test_answer_id, @test_answer.id %>
-        <%= text_area_tag :answer, nil, id: "code-editor", class: "p-4 border rounded-md w-full mb-4", rows: 15 %>
+        <%= hidden_field_tag :language, 'ruby' %>
+        <%= text_area_tag :answer, @test_answer.answer, id: "code-editor", class: "p-4 border rounded-md w-full mb-4 h-full", rows: 15 %>
         <div class="flex justify-end">
           <%= submit_tag "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
         </div>
