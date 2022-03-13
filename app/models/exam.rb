@@ -7,6 +7,10 @@ class Exam < ApplicationRecord
     end
   end
 
+  def submitted?
+    finished_at.present?
+  end
+
   def total_tests
     tests.count
   end

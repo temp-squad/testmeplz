@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  get 'tests/show'
-  get 'submissions/create'
+  get 'entries/create'
   resources :exams, only: [:show] do
+    resources :entries, only: [:create]
     resources :tests, only: [:show]
-    resources :submissions, only: [:create]
+
+    get :submissions, action: :create, controller: :submissions
+    resources :submissions, only: [:new] do
+      collection do
+        get :cancel, action: :destroy
+      end
+    end
   end
   resources :answers, only: [:update] do
     resources :submissions, only: [:create]

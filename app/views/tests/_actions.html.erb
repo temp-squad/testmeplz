@@ -1,0 +1,17 @@
+<% if exam.prev_test(test) %>
+  <%= button_to "Back", exam_test_path(exam_id: exam.id, id: exam.prev_test(test)), method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded" %>
+<% else %>
+  <%= button_to "Back", "#", method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded cursor-not-allowed opacity-25" %>
+<% end %>
+<% if exam.next_test(test) %>
+  <%= button_to "Next", exam_test_path(exam_id: exam.id, id: exam.next_test(test)), method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded" %>
+<% else %>
+  <%= button_to "Next", "#", method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded cursor-not-allowed opacity-25" %>
+<% end %>
+<% if exam.last_test(test) %>
+  <%= turbo_frame_tag :submission do %>
+    <%= button_to "Submit", new_exam_submission_path(exam_id: exam.id), method: :get, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded", confirm: "Once answers are submiited, you will not be able to make any changes. Are you sure?" %>
+  <% end %>
+<% else %>
+  <%= button_to "Submit", "#", method: :get, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded cursor-not-allowed opacity-25" %>
+<% end %>

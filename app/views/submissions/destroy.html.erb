@@ -1,0 +1,4 @@
+  <%= turbo_frame_tag :submission do %>
+    <%= button_to "Submit", new_exam_submission_path(exam_id: @exam.id), method: :get, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded", confirm: "Once answers are submiited, you will not be able to make any changes. Are you sure?" %>
+  <% end %>
+  
