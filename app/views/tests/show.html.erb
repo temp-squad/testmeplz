@@ -18,10 +18,14 @@
       <div id="code-editor-status" data-code-editor-target="status" class="text-xs bg-gray-200 py-2 px-4 absolute right-0 z-50">
         Saved
       </div>
-      <%= form_with url: answer_path(@answer), authenticity_token: false, method: :patch, id: "answer-form", class: "h-full", data: {'code-editor-target': 'form'} do %>
-        <%= hidden_field_tag :language, "ruby" %>
-        <%= text_area_tag :answer, @answer.answer, id: "code-editor", class: "p-4 w-full mb-4", rows: 15 %>
-      <% end %>
+      <div class="flex flex-col border-l justify-between h-full">
+        <%= form_with url: answer_path(@answer), authenticity_token: false, method: :patch, id: "answer-form", class: "h-4/6", data: {'code-editor-target': 'form'} do %>
+          <%= hidden_field_tag :language, "ruby" %>
+            <%= text_area_tag :answer, @answer.answer, id: "code-editor", class: "p-4 w-full mb-4", rows: 15 %>
+        <% end %>
+        <div class="h-2/6 shrink-0 border-t flex justify-center items-center">
+        </div>
+      </div>
     </div>
   </div>
 </div>

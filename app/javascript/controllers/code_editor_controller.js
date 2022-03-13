@@ -20,8 +20,5 @@ export default class extends Controller {
       this.statusTarget.innerText = "Saving..."
       this.formTarget.requestSubmit()
     })
-    
-    const codeEditorWrapper = codeEditor.display.wrapper
-    codeEditorWrapper.classList.add("h-full", "border-l");
   }
 }
