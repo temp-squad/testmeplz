@@ -3,6 +3,6 @@ class TestAnswer < ApplicationRecord
   belongs_to :test
 
   validate do
-    errors.add(:base, message: "Exam has already been submitted!")
+    errors.add(:base, message: "Exam has already been submitted!") if exam.submitted?
   end
 end
