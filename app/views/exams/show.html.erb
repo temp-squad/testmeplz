@@ -1,9 +1,10 @@
 <div class="h-screen flex items-center justify-center">
   <div class="text-center">
     <% if @exam.submitted? %>
-      <div class="text-center text-6xl mb-4">
+      <div class="text-center text-6xl mb-8">
         Thank you
       </div>
+      We will review your exam, and get back to you.
     <% else %>
       <div class="text-center text-6xl mb-8">
         Welcome, <%= @exam.user_full_name %>
