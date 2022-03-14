@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_14_161254) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_14_182214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_14_161254) do
     t.index ["test_id"], name: "index_test_cases_on_test_id"
   end
 
+  create_table "test_languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "language"
+    t.text "example"
+    t.text "placeholder"
+    t.uuid "test_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_test_languages_on_test_id"
+  end
+
   create_table "tests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -61,4 +71,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_14_161254) do
   add_foreign_key "test_answers", "exams"
   add_foreign_key "test_answers", "tests"
   add_foreign_key "test_cases", "tests"
+  add_foreign_key "test_languages", "tests"
 end

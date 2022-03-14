@@ -1,13 +1,9 @@
 class Exam < ApplicationRecord
   has_many :test_answers, dependent: :destroy
   has_many :tests, through: :test_answers
-  belongs_to :user
 
-  after_create do
-    Test.all.each do |test|
-      test_answers.create(test: test)
-    end
-  end
+  belongs_to :user
+  delegate :full_name, to: :user, prefix: true
 
   def submitted?
     finished_at.present?
