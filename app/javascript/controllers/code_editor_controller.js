@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import CodeMirror from "codemirror"
 import "codemirror/mode/ruby/ruby.js"
+import "codemirror/mode/javascript/javascript.js"
 import "codemirror/lib/codemirror.css"
 
 import { debounce } from "lodash/fp"
@@ -12,7 +13,7 @@ export default class extends Controller {
   connect() {
     const codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
       lineNumbers: true,
-      mode: "ruby",
+      mode: "javascript",
       tabSize: 2,
     });
     
