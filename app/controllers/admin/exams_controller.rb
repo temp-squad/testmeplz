@@ -4,7 +4,7 @@ class Admin::ExamsController < ApplicationController
   end
 
   def show
-    @exams = Exam.all
+    @exams = Exam.all.order("created_at DESC")
     @exam = Exam.find(params[:id])
   end
 end
