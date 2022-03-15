@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  match '/admin', to: redirect("/admin/exams"), via: :all
   namespace :admin do
-    get 'dashboard', action: "index", controller: "dashboard"
+    resources :exams, only: [:index, :show]
   end
-  get 'entries/create'
+
   resources :exams, only: [:show] do
     resources :entries, only: [:create]
     resources :tests, only: [:show]

@@ -1,0 +1,12 @@
+<%= link_to admin_exam_path(exam) do %>
+  <div class="border p-4 h-fit <%= 'border-blue-500' if exam == current_exam %>">
+    <div class="flex justify-between">
+      <div class="text-xs text-gray-400">
+        <%= exam.id %>
+      </div>
+    </div>
+    <div class="text-sm">
+      <span>Examinee: </span><span><%= exam.user_full_name %></span>
+    </div>
+  </div>
+<% end %>

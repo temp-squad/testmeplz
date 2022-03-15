@@ -1,0 +1,14 @@
+<div class="m-auto">
+  <div class="flex">
+    <div class="w-1/6 p-4">
+      <div class="px-4 py-2 bg-blue-500 text-white">
+        Exam
+      </div>
+    </div>
+    <div class="w-2/6 flex flex-col gap-2 p-4">
+      <%= render partial: "list_item", collection: @exams, as: :exam, locals: { current_exam: @exam } %>
+    </div>
+    <div class="w-3/6 min-h-screen overflow-hidden border-l p-4">
+    </div>
+  </div>
+</div>
