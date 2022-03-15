@@ -1,6 +1,6 @@
 class Admin::ExamsController < ApplicationController
   def index
-    @exams = Exam.all
+    @exams = Exam.all.order("created_at DESC")
   end
 
   def show
