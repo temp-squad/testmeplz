@@ -8,7 +8,11 @@
     <div class="w-2/6 flex flex-col gap-2 p-4">
       <%= render partial: "list_item", collection: @exams, as: :exam, locals: { current_exam: @exam } %>
     </div>
-    <div class="w-3/6 min-h-screen overflow-hidden border-l p-4">
+    <div class="w-3/6 h-screen overflow-auto border-l p-4">
+      <div class="mb-4">
+        <%= link_to "View Code", exam_test_path(exam_id: @exam.id, id: @exam.tests.first.id), class: "text-xs text-blue-500", target: "_blank" %>
+      </div>
+      <%= render partial: "comments", locals: { exam: @exam, comment: @comment } %>
     </div>
   </div>
 </div>

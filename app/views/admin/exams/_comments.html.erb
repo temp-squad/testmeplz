@@ -1,0 +1,16 @@
+<%= turbo_frame_tag :comments do %>
+  <%= form_with model: [:admin, exam, Comment.new], class: "flex gap-2 mb-4" do |f| %>
+    <%= f.text_field :content, placeholder: "Add a comment here..", class: "border text-sm flex-1 px-4 py-2" %>
+    <%= f.submit "Save", class: "text-sm flex-1 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold flex-grow-0" %>
+  <% end %>
+  <div class="grid grid-cols-1 gap-4">
+    <% exam.comments.each do |comment| %>
+      <div class="p-4 border text-sm">
+        <div class="text-xs mb-2 text-gray-400 flex justify-between">
+          <%= comment.created_at.localtime %> <%= link_to "Delete", admin_exam_comment_path(exam_id: exam, id: comment), class: "hover:text-red-500", data: { "turbo-method": "delete" } %>
+        </div>
+        <%= comment.content %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
