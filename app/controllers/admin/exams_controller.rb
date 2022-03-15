@@ -1,4 +1,4 @@
-class Admin::ExamsController < ApplicationController
+class Admin::ExamsController < Admin::BaseController
   def index
     @exams = Exam.all.order("created_at DESC")
   end
