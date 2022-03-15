@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'dashboard', action: "index", controller: "dashboard"
+  end
   get 'entries/create'
   resources :exams, only: [:show] do
     resources :entries, only: [:create]
