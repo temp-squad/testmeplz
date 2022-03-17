@@ -7,11 +7,18 @@ import "codemirror/lib/codemirror.css"
 import { debounce } from "lodash/fp"
 
 // Connects to data-controller="code-editor"
+
+let codeEditor
+
 export default class extends Controller {
   static targets = ["form", "status"]
+  
+  setCodeEditorHeight() {
+    codeEditor.setSize(null, this.formTarget.offsetHeight)
+  }
 
   connect() {
-    const codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+    codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
       lineNumbers: true,
       mode: "javascript",
       tabSize: 2,
@@ -22,6 +29,6 @@ export default class extends Controller {
       this.formTarget.requestSubmit()
     })
 
-    codeEditor.setSize(null, "100%")
+    this.setCodeEditorHeight()
   }
 }

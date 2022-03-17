@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'run/create'
   match '/admin', to: redirect("/admin/exams"), via: :all
   namespace :admin do
     resources :exams, only: [:index, :show] do
@@ -8,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :exams, only: [:show] do
     resources :entries, only: [:create]
-    resources :tests, only: [:show]
+    resources :tests, only: [:show] do
+      resource :run, only: [:create], controller: "run"
+    end
 
     get :submissions, action: :create, controller: :submissions
     resources :submissions, only: [:new] do

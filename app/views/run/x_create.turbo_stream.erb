@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "code-runner" do %>
+  <%= button_to "Running...", "#", id: "code-runner", class: "btn btn-primary btn-disabled absolute right-0 m-4", data: { "turbo-method": "post" }, disabled: true %>
+<% end %>
