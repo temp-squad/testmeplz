@@ -11,10 +11,19 @@ import { debounce } from "lodash/fp"
 let codeEditor
 
 export default class extends Controller {
-  static targets = ["form", "status"]
+  static targets = ["form", "status", "output"]
   
   setCodeEditorHeight() {
     codeEditor.setSize(null, this.formTarget.offsetHeight)
+  }
+
+  setOutputHeight() {
+    this.outputTarget.style.height = this.outputTarget.offsetHeight + "px"
+  }
+
+  resizeCodeEditor() {
+    this.setCodeEditorHeight()
+    this.setOutputHeight()    
   }
 
   connect() {
@@ -29,6 +38,6 @@ export default class extends Controller {
       this.formTarget.requestSubmit()
     })
 
-    this.setCodeEditorHeight()
+    this.resizeCodeEditor()
   }
 }

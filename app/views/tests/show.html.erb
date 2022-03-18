@@ -1,6 +1,6 @@
 <%= turbo_stream_from @answer %>
 <div class="h-screen flex flex-col">
-  <div class="flex justify-between p-4 border">
+  <div class="flex justify-between p-2 border">
     <div class="text-sm flex items-center justify-center">
       <%= @exam.test_position(@test) %> / <%= @exam.total_tests %>
     </div>
@@ -15,7 +15,7 @@
         <div class="markdown-body text-sm"><%= markdown(@test.description) %></div>
       </div>
     </div>
-    <div class="w-4/6" data-controller="code-editor" data-action="resize@window->code-editor#setCodeEditorHeight">
+    <div class="w-4/6" data-controller="code-editor" data-action="resize@window->code-editor#resizeCodeEditor">
       <div id="code-editor-status" data-code-editor-target="status" class="text-xs bg-gray-200 py-2 px-4 absolute right-0 z-50">
         Saved
       </div>
@@ -24,7 +24,7 @@
           <%= hidden_field_tag :language, "ruby" %>
             <%= text_area_tag :answer, @answer.answer, id: "code-editor", class: "p-4 w-full mb-4", rows: 15 %>
         <% end %>
-        <div class="h-2/6 shrink-0 border-t bg-gray-800 text-white overflow-auto" id="code-runner">
+        <div class="h-2/6 shrink-0 border-t bg-gray-800 text-white overflow-auto" id="code-runner" data-code-editor-target="output">
           <%= link_to "Run", exam_test_run_path(exam_id: @exam, test_id: @test), id: "code-runner-button", class: "btn btn-primary absolute right-0 m-4", data: { "turbo-method": "post" } %>
           <div id="code-runner-output" class="mardown-body text-xs p-4">
           </div>
