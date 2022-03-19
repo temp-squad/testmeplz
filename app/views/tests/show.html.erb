@@ -1,16 +1,18 @@
 <%= turbo_stream_from @answer %>
-<div class="h-screen flex flex-col" data-controller="code-editor" >
-  <div class="flex justify-between p-2 border">
-    <div class="text-sm flex items-center justify-center">
-      <%= @exam.test_position(@test) %> / <%= @exam.total_tests %>
-    </div>
-    <div class="flex justify-end gap-2">
-      <%= render partial: "actions", locals: {exam: @exam, test: @test} %>
+<div class="flex h-screen flex-col items-stretch">
+  <div id="exam-navigation" class="border-b flex-grow-0">
+    <div class="flex justify-between p-2">
+      <div class="text-sm flex items-center justify-center">
+        <%= @exam.test_position(@test) %> / <%= @exam.total_tests %>
+      </div>
+      <div class="flex justify-end gap-2">
+        <%= render partial: "actions", locals: {exam: @exam, test: @test} %>
+      </div>
     </div>
   </div>
-  <div class="flex h-full flex-1">
-    <div class="w-2/6 px-4">
-      <div class="py-4 text-sm">
+  <div id="code-editor" class="flex flex-1" data-controller="code-editor">
+    <div class="w-2/6">
+      <div class="p-4 text-sm">
         <div class="mb-4 flex justify-between items-center">
           <%= @test.title %>
           <%= form_with model: @answer, url: answer_language_path(answer_id: @answer.id), data: { "code-editor-target": "languageForm" } do |f| %>
@@ -25,24 +27,28 @@
         <div class="markdown-body text-sm"><%= markdown(@test.description) %></div>
       </div>
     </div>
-    <div class="w-4/6" data-action="resize@window->code-editor#resizeCodeEditor">
-      <div id="code-editor-status" data-code-editor-target="status" class="text-xs bg-gray-200 py-2 px-4 absolute right-0 z-50">
-        Saved
+    <div class="w-4/6 flex-col border-l">
+      <div class="h-4/6 flex-grow-0 relative">
+        <div class="absolute w-full h-full overflow-auto">
+          <%= form_with model: @answer, url: answer_path(@answer), authenticity_token: false, method: :patch, id: "answer-form", class: "h-full", data: {'code-editor-target': 'form'} do |f| %>
+            <%= f.hidden_field :language, data: { "code-editor-target": "answerLanguage" } %>
+            <%= f.text_area :answer, id: "code-editor-canvas", class: "p-4 w-full mb-4", rows: 15 %>
+          <% end %>
+        </div>
       </div>
-      <div class="flex flex-col border-l justify-between h-full">
-        <%= form_with model: @answer, url: answer_path(@answer), authenticity_token: false, method: :patch, id: "answer-form", class: "h-4/6", data: {'code-editor-target': 'form'} do |f| %>
-          <%= f.hidden_field :language, data: { "code-editor-target": "answerLanguage" } %>
-          <%= f.text_area :answer, id: "code-editor", class: "p-4 w-full mb-4", rows: 15 %>
-        <% end %>
-        <div class="h-2/6 shrink-0 border-t bg-gray-800 text-white overflow-auto" id="code-runner" data-code-editor-target="output">
+      <div class="h-2/6 flex-col flex-grow-0 relative">
+        <div class="absolute w-full h-full overflow-auto bg-gray-800">
           <%= button_to exam_test_run_path(exam_id: @exam, test_id: @test), class: "btn btn-primary absolute right-0 m-4", data: { "turbo-method": "post" } do %>
             <span class="show-when-enabled">Run</span>
             <span class="show-when-disabled">Running...</span>
           <% end %>
-          <div id="code-runner-output" class="mardown-body text-xs p-4">
+          <div id="code-runner-output" class="mardown-body text-xs p-4 text-white">
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div id="test-status" class="border-t flex-grow-0">
+    <%= render partial: 'answers/status', locals: {answer: @answer, status: "All changes has been saved"} %>
   </div>
 </div>

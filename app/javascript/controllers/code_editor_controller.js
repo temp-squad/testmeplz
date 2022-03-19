@@ -4,28 +4,11 @@ import "codemirror/mode/ruby/ruby.js"
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/lib/codemirror.css"
 
-import { debounce } from "lodash/fp"
-
-// Connects to data-controller="code-editor"
-
 let codeEditor
 
 export default class extends Controller {
-  static targets = ["form", "status", "output", "languageSwitcher", "languageForm", "answerLanguage"]
+  static targets = ["form", "output", "languageSwitcher", "languageForm", "answerLanguage"]
   
-  setCodeEditorHeight() {
-    codeEditor.setSize(null, this.formTarget.offsetHeight)
-  }
-
-  setOutputHeight() {
-    this.outputTarget.style.height = this.outputTarget.offsetHeight + "px"
-  }
-
-  resizeCodeEditor() {
-    this.setCodeEditorHeight()
-    this.setOutputHeight()    
-  }
-
   switchLanguage(event) {
     const language = event.target.value
     codeEditor.setOption("mode", language)
@@ -34,17 +17,17 @@ export default class extends Controller {
   }
 
   connect() {
-    codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+    codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor-canvas"), {
       lineNumbers: true,
-      mode: "javascript",
+      mode: this.answerLanguageTarget.value,
       tabSize: 2,
     });
     
     codeEditor.on('change', (instance, changeObject) => {
-      this.statusTarget.innerText = "Saving..."
+      document.getElementById("code-editor-status").innerText = "Saving..."
       this.formTarget.requestSubmit()
     })
 
-    this.resizeCodeEditor()
+    codeEditor.setSize(null, "100%")
   }
 }
