@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'language/update'
   get 'run/create'
   match '/admin', to: redirect("/admin/exams"), via: :all
   namespace :admin do
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   resources :exams, only: [:show] do
     resources :entries, only: [:create]
     resources :tests, only: [:show] do
-      resource :run, only: [:create], controller: "run"
+      resource :run, only: [:create], controller: :run
     end
 
     get :submissions, action: :create, controller: :submissions
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
   resources :answers, only: [:update] do
+    resource :language, only: [:update], controller: :language
     resources :submissions, only: [:create]
   end  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -11,6 +11,6 @@ class AnswersController < ApplicationController
 private
 
   def test_answer_params
-    params.permit(:answer)
+    params.require(:test_answer).permit(:answer)
   end
 end

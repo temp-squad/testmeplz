@@ -74,6 +74,14 @@ const solution = (p1,p2) => {
 }
 EOF
       )
+      test.test_languages.create(
+        language: "ruby", 
+        placeholder: <<-EOF
+def solution(p1,p2)
+  # your code goes here
+end
+EOF
+      )      
     end
   end
 end

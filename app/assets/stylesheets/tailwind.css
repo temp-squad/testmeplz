@@ -19,3 +19,12 @@
     @apply cursor-not-allowed opacity-25;
   }
 }
+
+button                  .show-when-disabled { display: none; }
+button[disabled]        .show-when-disabled { 
+  @apply cursor-not-allowed opacity-25;
+  display: initial; 
+}
+
+button                  .show-when-enabled { display: initial; }
+button[disabled]        .show-when-enabled { display: none; }

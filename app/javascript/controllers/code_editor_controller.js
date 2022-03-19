@@ -11,7 +11,7 @@ import { debounce } from "lodash/fp"
 let codeEditor
 
 export default class extends Controller {
-  static targets = ["form", "status", "output"]
+  static targets = ["form", "status", "output", "languageSwitcher", "languageForm", "answerLanguage"]
   
   setCodeEditorHeight() {
     codeEditor.setSize(null, this.formTarget.offsetHeight)
@@ -24,6 +24,13 @@ export default class extends Controller {
   resizeCodeEditor() {
     this.setCodeEditorHeight()
     this.setOutputHeight()    
+  }
+
+  switchLanguage(event) {
+    const language = event.target.value
+    codeEditor.setOption("mode", language)
+    this.answerLanguageTarget.value = language
+    this.languageFormTarget.requestSubmit()
   }
 
   connect() {

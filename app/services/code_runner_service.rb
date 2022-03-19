@@ -31,13 +31,13 @@ class CodeRunnerService
     request.body = JSON.dump({
       "name": "Ruby",
       "title": "3xvmmne9p",
-      "mode": "javascript",
+      "mode": test_answer.language,
       "description": nil,
       "extension": "rb",
       "languageType": "programming",
       "active": true,
       "properties": {
-        "language": "javascript",
+        "language": test_answer.language,
         "docs": true,
         "tutorials": true,
         "cheatsheets": true,
