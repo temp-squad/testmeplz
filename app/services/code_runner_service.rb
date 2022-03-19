@@ -56,14 +56,12 @@ class CodeRunnerService
     response = https.request(request)
     result = OpenStruct.new(JSON.parse(response.body))
 
-    if result.exception
+    if result.exception.present?
       output = "<p>#{result.exception}</p>"
-    else
-      p result.stdout
+    elsif result.stdout.present?
       output = result.stdout.split("\n").map{ |line| "<p>#{line}</p>" }.join("")
     end
-    p output
 
-    @test_answer.broadcast_prepend_to(@test_answer, target: "code-runner-output", html: output.html_safe)
+    @test_answer.broadcast_prepend_to(@test_answer, target: "code-runner-output", html: output.try(:html_safe))
   end
 end
