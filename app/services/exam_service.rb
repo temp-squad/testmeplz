@@ -7,5 +7,7 @@ class ExamService
       test_language = test.test_languages.first
       exam.test_answers.create(test: test, answer: test_language.placeholder)
     end
+
+    return exam
   end
 end

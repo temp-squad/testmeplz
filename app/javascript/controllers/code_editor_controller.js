@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import CodeMirror from "codemirror"
 import "codemirror/mode/ruby/ruby.js"
 import "codemirror/mode/javascript/javascript.js"
+import "codemirror/addon/comment/comment.js"
 import "codemirror/lib/codemirror.css"
 
 let codeEditor
@@ -29,5 +30,9 @@ export default class extends Controller {
     })
 
     codeEditor.setSize(null, "100%")
+
+    // codeEditor.toggleComment({
+    //   indent: true
+    // })
   }
 }

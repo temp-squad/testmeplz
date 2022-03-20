@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "new-exam" do %>
+  <%= form_with model: [:admin, Exam.new], class: "border rounded p-4 mb-4", data: { "turbo-frame": "_top" } do |f| %>
+    <div class="grid mb-4">
+      <%= f.label :full_name, class: "mb-2" %>
+      <%= f.text_field :full_name, class: "border px-4 py-2" %>
+    </div>
+    <div class="flex justify-end">
+      <%= f.button "Create", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
