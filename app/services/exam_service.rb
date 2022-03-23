@@ -5,7 +5,7 @@ class ExamService
 
     Test.all.each do |test|
       test_language = test.test_languages.first
-      exam.test_answers.create(test: test, answer: test_language.placeholder)
+      exam.test_answers.create(test: test, answer: test_language.placeholder, language: test_language.language)
     end
 
     return exam
