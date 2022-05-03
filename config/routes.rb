@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :exams, only: [:index, :show, :new, :create] do
       resources :comments, only: [:new, :create, :destroy]
     end
+    resources :tests, only: [:index, :show]
   end
 
   resources :exams, only: [:show] do

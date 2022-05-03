@@ -7,4 +7,8 @@ module ApplicationHelper
     ]
     Markdown.new(text, *options).to_html.html_safe
   end
+
+  def active_link_to(*args)
+    link_to(*args)
+  end
 end

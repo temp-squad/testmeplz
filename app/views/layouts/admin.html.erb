@@ -12,6 +12,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="flex">
+      <div class="shrink-0">
+        <%= render "admin/shared/sidebar" %>
+      </div>
+      <div class="flex-1">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
