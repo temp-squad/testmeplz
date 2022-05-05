@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # IsCompanyMember is a module to manage methods related with a company
-  include IsCompanyMember
+  include HasCompanyMember
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
