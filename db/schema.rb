@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_05_073515) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_05_080943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "candidates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "company_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_candidates_on_company_id"
+    t.index ["user_id"], name: "index_candidates_on_user_id"
+  end
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "content"
@@ -21,6 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_073515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exam_id"], name: "index_comments_on_exam_id"
+  end
+
+  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "company_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_members_on_company_id"
+    t.index ["user_id"], name: "index_company_members_on_user_id"
   end
 
   create_table "exams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -83,7 +107,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_073515) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "candidates", "companies"
+  add_foreign_key "candidates", "users"
   add_foreign_key "comments", "exams"
+  add_foreign_key "company_members", "companies"
+  add_foreign_key "company_members", "users"
   add_foreign_key "exams", "users"
   add_foreign_key "test_answers", "exams"
   add_foreign_key "test_answers", "tests"
