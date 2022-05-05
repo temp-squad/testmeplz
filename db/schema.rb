@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_05_080943) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_05_091538) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_080943) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_company_members_on_company_id"
     t.index ["user_id"], name: "index_company_members_on_user_id"
+  end
+
+  create_table "company_tests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "company_id", null: false
+    t.uuid "test_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_tests_on_company_id"
+    t.index ["test_id"], name: "index_company_tests_on_test_id"
   end
 
   create_table "exams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -112,6 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_080943) do
   add_foreign_key "comments", "exams"
   add_foreign_key "company_members", "companies"
   add_foreign_key "company_members", "users"
+  add_foreign_key "company_tests", "companies"
+  add_foreign_key "company_tests", "tests"
   add_foreign_key "exams", "users"
   add_foreign_key "test_answers", "exams"
   add_foreign_key "test_answers", "tests"

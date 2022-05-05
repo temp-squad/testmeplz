@@ -1,2 +1,17 @@
-<h1>Admin::Tests#index</h1>
-<p>Find me in app/views/admin/tests/index.html.erb</p>
+<div class="p-4">
+  <%= link_to "New Test", new_admin_test_path %>
+  <% @tests.each do |test| %>
+    <%= link_to admin_test_path(test) do %>
+      <div class="border p-4 h-fit">
+        <div class="flex justify-between">
+          <div class="text-xs text-gray-400">
+            <%= test.id %>
+          </div>
+        </div>
+        <div class="text-sm">
+          <span><%= test.title %></span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

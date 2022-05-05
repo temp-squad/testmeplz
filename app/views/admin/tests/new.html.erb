@@ -1,0 +1,13 @@
+<%= form_with model: [:admin, @test], class: "border rounded p-4 mb-4" do |f| %>
+  <div class="grid mb-4">
+    <%= f.label :title, class: "mb-2" %>
+    <%= f.text_field :title, class: "border px-4 py-2" %>
+  </div>
+  <div class="grid mb-4">
+    <%= f.label :description, class: "mb-2" %>
+    <%= f.text_area :description, class: "border px-4 py-2" %>
+  </div>
+  <div class="flex justify-end">
+    <%= f.button "Create", class: "btn btn-primary" %>
+  </div>
+<% end %>
