@@ -1,0 +1,14 @@
+<nav class="border-gray-200 px-2 sm:px-4 py-2.5 bg-primary">
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <%= link_to root_path, class: "flex items-center" do %>
+      <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">TESTMEPLZ</span>
+    <% end %>
+    <div>
+      <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+        <li>
+          <%= link_to "Challenges", challenges_path, class: "block py-2 pr-4 pl-3 text-white hover:text-gray-700 font-bold tracking-wide" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

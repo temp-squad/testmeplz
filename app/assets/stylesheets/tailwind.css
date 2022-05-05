@@ -18,7 +18,12 @@
   .btn[disabled=disabled] {
     @apply cursor-not-allowed opacity-25;
   }
+
+  .bg-primary {
+    @apply bg-blue-700;
+  }
 }
+
 
 button                  .show-when-disabled { display: none; }
 button[disabled]        .show-when-disabled { 
