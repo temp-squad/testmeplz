@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'test_sets/show'
   devise_for :users
   get 'welcome/index'
   root "welcome#index"
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
     resources :tests
   end
 
+  resources :test_sets, only: [:show]
   resources :exams, only: [:show] do
     resources :entries, only: [:create]
     resources :tests, only: [:show] do
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :answers, only: [:update] do
     resource :language, only: [:update], controller: :language
     resources :submissions, only: [:create]

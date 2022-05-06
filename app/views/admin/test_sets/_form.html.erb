@@ -7,6 +7,10 @@
     <%= f.label :description, class: "mb-2" %>
     <%= f.text_area :description, class: "border px-4 py-2" %>
   </div>
+  <div class="grid mb-4">
+    <%= f.label :public, class: "mb-2" %>
+    <%= f.check_box :public, class: "border px-4 py-2" %>
+  </div>  
   <div class="flex justify-end">
     <%= f.button test_set.new_record? ? "Create" : "Update" , class: "btn btn-primary" %>
   </div>

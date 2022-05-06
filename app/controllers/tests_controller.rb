@@ -1,4 +1,6 @@
 class TestsController < ApplicationController
+  layout "exam_room"
+
   def show
     @exam = Exam.find(params[:exam_id])
 

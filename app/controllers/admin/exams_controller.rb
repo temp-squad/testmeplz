@@ -7,7 +7,8 @@ class Admin::ExamsController < Admin::BaseController
   end
 
   def create
-    @exam = ExamService.create(full_name: exam_params[:full_name])
+    # FIX THIS
+    # @exam = ExamService.create(full_name: exam_params[:full_name])
 
     redirect_to admin_exams_path
   end

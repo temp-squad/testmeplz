@@ -27,6 +27,6 @@ class Admin::TestSetsController < Admin::BaseController
 private
 
   def test_set_params
-    params.require(:test_set).permit(:title, :description)
+    params.require(:test_set).permit(:title, :description, :public)
   end
 end
