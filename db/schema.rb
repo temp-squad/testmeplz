@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_05_091538) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_06_073351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -95,6 +95,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_091538) do
     t.index ["test_id"], name: "index_test_languages_on_test_id"
   end
 
+  create_table "test_set_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "test_id", null: false
+    t.uuid "test_set_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_test_set_items_on_test_id"
+    t.index ["test_set_id"], name: "index_test_set_items_on_test_set_id"
+  end
+
+  create_table "test_sets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "description"
+    t.index ["company_id"], name: "index_test_sets_on_company_id"
+  end
+
   create_table "tests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -128,4 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_091538) do
   add_foreign_key "test_answers", "tests"
   add_foreign_key "test_cases", "tests"
   add_foreign_key "test_languages", "tests"
+  add_foreign_key "test_set_items", "test_sets"
+  add_foreign_key "test_set_items", "tests"
+  add_foreign_key "test_sets", "companies"
 end

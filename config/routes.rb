@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :exams, only: [:index, :show, :new, :create] do
       resources :comments, only: [:new, :create, :destroy]
     end
+    resources :test_sets do
+      resources :test_set_items, only: [:create, :update, :destroy]
+    end
     resources :tests
   end
 

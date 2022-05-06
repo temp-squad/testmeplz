@@ -1,0 +1,17 @@
+<div class="p-4">
+  <%= link_to "New Test Set", new_admin_test_set_path %>
+  <% @test_sets.each do |test_set| %>
+    <%= link_to admin_test_set_path(test_set) do %>
+      <div class="border p-4 h-fit">
+        <div class="flex justify-between">
+          <div class="text-xs text-gray-400">
+            <%= test_set.id %>
+          </div>
+        </div>
+        <div class="text-sm">
+          <span><%= test_set.title %></span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

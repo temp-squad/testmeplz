@@ -1,0 +1,29 @@
+<%= render partial: "form", locals: { test_set: @test_set } %>
+
+<%= form_with model: [:admin, @test_set, @test_set.items.new], class: "border rounded p-4 mb-4" do |f| %>
+  <div class="grid mb-4">
+    <%= f.label :test_id, class: "mb-2" %>
+    <%= f.select :test_id, current_company.tests.pluck(:title, :id), {}, class: "border px-4 py-2" %>
+  </div>
+  <div class="flex justify-end">
+    <%= f.button "Add" , class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+<div class="p-4">
+  <% @test_set.tests.each do |test| %>
+    <%= link_to admin_test_path(test) do %>
+      <div class="border p-4 h-fit">
+        <div class="flex justify-between">
+          <div class="text-xs text-gray-400">
+            <%= test.id %>
+          </div>
+        </div>
+        <div class="text-sm">
+          <span><%= test.title %></span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
